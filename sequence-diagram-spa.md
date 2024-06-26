@@ -2,35 +2,28 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: User clicks the save button on the form
-    browser->>server: POST new_note
+    browser->>server: GET /spa
     activate server
-    Note over server: Server processes the request and issues a 302 redirect
-    server-->>browser: 302 Redirect to /notes
-    deactivate server
-
-    browser->>server: GET /notes
-    activate server
-    Note over server: Server sends HTML document for notes page
+    Note over server: Server sends the HTML document for the SPA
     server-->>browser: HTML document
     deactivate server
 
-    browser->>server: GET /main.css
+    browser->>server: GET /spa/main.css
     activate server
-    Note over server: Server sends CSS file
+    Note over server: Server sends the CSS file for styling
     server-->>browser: CSS file
     deactivate server
 
-    browser->>server: GET /main.js
+    browser->>server: GET /spa/spa.js
     activate server
-    Note over server: Server sends JavaScript file
+    Note over server: Server sends the JavaScript file specific to SPA
     server-->>browser: JavaScript file
     deactivate server
 
-    browser->>server: GET /data.json
+    browser->>server: GET /spa/data.json
     activate server
-    Note over server: Server sends JSON data of all notes
+    Note over server: Server sends the initial data as JSON
     server-->>browser: JSON data of notes
     deactivate server
 
-    Note right of browser: Browser renders the updated notes list
+    Note right of browser: Browser executes JavaScript to render the notes on the page
